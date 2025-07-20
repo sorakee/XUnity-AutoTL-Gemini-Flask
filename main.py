@@ -43,13 +43,10 @@ def create_translation_prompt(text, target_lang="en", source_lang="ja"):
 
         Retain honorifics.
         Preserve tone, emotion and nuances when possible. 
-        Only return translations.
+        You must return the result only.
 
         Translate the following {source_name} text into natural {target_name}:
-
-        {source_name}: {text}
-
-        {target_name}:"""
+        {text}"""
 
 @app.route('/translate', methods=['GET'])
 def translate():
@@ -57,7 +54,7 @@ def translate():
     try:
         text = request.args.get('text', '').strip()
         target_lang = request.args.get('lang', 'en')
-        source_lang = request.args.get('source', 'ja')
+        source_lang = request.args.get('source', 'jp')
         
         if not text:
             return "No text provided"
